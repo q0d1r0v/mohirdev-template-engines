@@ -1,0 +1,100 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background: #f5f6ff;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .col {
+    flex: 1;
+    padding: 30px !important;
+    box-sizing: border-box;
+    text-align: left;
+    margin: 5px;
+  }
+
+  @media (max-width: 600px) {
+    .col {
+      flex: 100%;
+    }
+  }
+
+  @media (min-width: 600px) and (max-width: 992px) {
+    .col {
+      flex: 0 0 48%;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .col {
+      flex: 0 0 30%;
+    }
+  }
+.nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    user-select: none;
+    transition: all 0.3s;
+    background: rgb(41, 41, 255);
+    padding: 16px;
+    color: #fff;
+}
+.link {
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.link:hover {
+    font-size: 18px;
+}
+.totos-list {
+    background: #fff;
+    display: inline-block;
+    padding: 10px;
+    border-radius: 8px;
+    user-select: none;
+}
+.container {
+    padding: 30px;
+}
+.texts {
+    margin-top: 10px;
+}
+.title {
+    font-weight: 600;
+}
+.form-container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.form-card {
+    background: #fff;
+    padding: 18px;
+    border-radius: 8px;
+}
+.form-title {
+    margin-bottom: 16px;
+}
+.fomrs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+input {
+    padding: 10px;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    border: 1px solid black;
+}
+input:focus {
+    border: 1px solid blue;
+}

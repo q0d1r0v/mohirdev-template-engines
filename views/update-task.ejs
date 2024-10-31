@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/main.css" />
+    <title>Update task</title>
+  </head>
+  <body>
+    <div class="nav-bar">
+      <div class="link" onclick="goToPage('home')">Bosh sahifa(ToDos)</div>
+      <div class="link" onclick="goToPage('add')">
+        Yangi topshiriq qo'shish +
+      </div>
+    </div>
+
+    <div class="form-container">
+      <div class="form-card">
+        <div class="form-title">Mavjud vazifani o'zgartirish</div>
+        <div class="fomrs">
+          <input
+            type="text"
+            placeholder="*ID"
+            id="id"
+            value="<%= task.id %>"
+            disabled
+          />
+          <input
+            type="text"
+            placeholder="*Sarlavha"
+            id="title"
+            value="<%= task.title %>"
+          />
+          <input
+            type="text"
+            placeholder="Tavsif"
+            id="description"
+            value="<%= task.description %>"
+          />
+          <input
+            type="text"
+            placeholder="Status"
+            id="status"
+            value="<%= task.status %>"
+          />
+        </div>
+        <div
+          style="
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: end;
+          "
+        >
+          <button
+            style="
+              padding: 10px;
+              background: rgb(41, 41, 255);
+              color: #fff;
+              border: none;
+              border-radius: 8px;
+              cursor: pointer;
+            "
+            onclick="updateTask()"
+          >
+            Yangilash
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    const form = {
+      id: "",
+      title: "",
+      description: "",
+      status: "",
+    };
+
+    function goToPage(action_name) {
+      if (action_name === "home") {
+        window.location.href = "/task";
+      } else {
+        window.location.href = "/task/new";
+      }
+    }
+    async function updateTask() {
+      form.id = document.getElementById("id").value;
+      form.title = document.getElementById("title").value;
+      form.description = document.getElementById("description").value;
+      form.status = document.getElementById("status").value;
+      console.log(form);
+      if (!form.title) {
+        alert("Sarlavha kiritilishi shart!");
+      } else {
+        await fetch(`/task/:${form.id}/update`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ form }),
+        });
+        document.getElementById("title").value = "";
+        document.getElementById("description").value = "";
+        document.getElementById("status").value = "";
+        window.location.href = "/task";
+      }
+    }
+  </script>
+</html>

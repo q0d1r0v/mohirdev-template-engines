@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/main.css" />
+    <title>ToDos</title>
+  </head>
+  <body>
+    <div class="nav-bar">
+      <div class="link" onclick="goToPage('home')">Bosh sahifa(ToDos)</div>
+      <div class="link" onclick="goToPage('add')">
+        Yangi topshiriq qo'shish +
+      </div>
+    </div>
+    <div class="container row">
+      <% for (let i = 0; i < tasks.length; i++) { %>
+      <div class="totos-list col">
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            gap: 10px;
+          "
+        >
+          <div
+            style="
+              border: 1px solid orange;
+              padding: 5px;
+              border-radius: 8px;
+              font-size: 10px;
+              cursor: pointer;
+            "
+            onclick="goToEditPage('<%= JSON.stringify(tasks[i]) %>')"
+          >
+            Tahrirlash
+          </div>
+          <div
+            style="
+              border: 1px solid red;
+              padding: 5px;
+              border-radius: 8px;
+              font-size: 10px;
+              cursor: pointer;
+            "
+            onclick="deleteTask('<%= JSON.stringify(tasks[i]) %>')"
+          >
+            O'chirish
+          </div>
+        </div>
+        <div class="texts">
+          <span class="title">ID:</span><%= tasks[i].id %>
+        </div>
+        <div class="texts">
+          <span class="title">Sarlavha:</span><%= tasks[i].title %>
+        </div>
+        <div class="texts">
+          <span class="title">Tavsif: </span> <%= tasks[i].description %>
+        </div>
+        <div class="texts">
+          <span class="title">Holat:</span> <%= tasks[i].status %>
+        </div>
+      </div>
+      <% } %>
+    </div>
+
+    <script>
+      function goToPage(action_name) {
+        if (action_name === "home") {
+          window.location.href = "/task";
+        } else {
+          window.location.href = "/task/new";
+        }
+      }
+      async function goToEditPage(task) {
+        window.location.href = `/task/${JSON.parse(task).id}/edit`;
+      }
+      async function deleteTask(task) {
+        await fetch(`/task/${JSON.parse(task).id}/delete`, {
+          method: "DELETE",
+        });
+
+        window.location.reload();
+      }
+    </script>
+  </body>
+</html>
